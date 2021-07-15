@@ -57,6 +57,7 @@ export class View360Manager {
   pointMarkerSpriteScale?: number;
   markerSpriteScale?: number;
   styles: Viewer360Styles = {};
+  _enableAutoRotate: boolean = true;
 
   constructor(opts?: { webgl?: THREE.WebGLRenderer }) {
     this.renderer = opts?.webgl || new THREE.WebGLRenderer();
@@ -65,6 +66,11 @@ export class View360Manager {
     const directionalLight = new THREE.DirectionalLight(0xff0000, 1);
     directionalLight.position.set(100, 100, 100);
     this.scene.add(directionalLight);
+  }
+
+  set enableAutoRotate(autoRotate: boolean) {
+    this._enableAutoRotate = autoRotate;
+    this.shouldAutoRotate = autoRotate;
   }
 
   get labels() {
@@ -103,7 +109,7 @@ export class View360Manager {
 
   draw() {
     requestAnimationFrame((time) => {
-      if (this.shouldAutoRotate) {
+      if (this._enableAutoRotate && this.shouldAutoRotate) {
         const newEuler = rotateByAxis2D(
           { x: 1, y: 0 },
           this.camera.quaternion,
@@ -428,6 +434,8 @@ export class View360Manager {
         transform: 'translate(-1000px, -1000px)',
         ...this.styles.pointMarkerLabel,
       },
+      onMouseEnter: () => (this.shouldAutoRotate = false),
+      onMouseLeave: () => (this.shouldAutoRotate = true),
       children: [
         React.createElement('a', {
           style: {
@@ -481,6 +489,8 @@ export class View360Manager {
         transform: 'translate(-1000px, -1000px)',
         ...this.styles.markerLabel,
       },
+      onMouseEnter: () => (this.shouldAutoRotate = false),
+      onMouseLeave: () => (this.shouldAutoRotate = true),
       children: [
         React.createElement('div', {
           style: {

@@ -78,7 +78,7 @@ const Viewer360 = ({
   // update settings
   useEffect(() => {
     if (!view360Manager) return;
-    view360Manager.shouldAutoRotate = !!autoRotate;
+    view360Manager.enableAutoRotate = !!autoRotate;
     view360Manager.autoRotateSpeed = autoRotateSpeed;
   }, [view360Manager, autoRotate, autoRotateSpeed]);
 
