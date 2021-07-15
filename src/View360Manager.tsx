@@ -54,8 +54,8 @@ export class View360Manager {
     'http://www.telestream.net/wirecast-go/images/icon_512x512-2x.png';
   pointMarkerSpriteSize: number = 35;
   markerSpriteSize: number = 40;
-  pointMarkerSpriteScale: number = 35;
-  markerSpriteScale: number = 40;
+  pointMarkerSpriteScale?: number;
+  markerSpriteScale?: number;
   styles: Viewer360Styles = {};
 
   constructor(opts?: { webgl?: THREE.WebGLRenderer }) {
@@ -608,8 +608,6 @@ export class View360Manager {
         // timeout so label doesn't flash in old position
         if (label.style.display !== 'flex')
           setTimeout(() => (label.style.display = 'flex'), 100);
-
-        this.events.dispatch(eventVars.ON_LABELS_CHANGE, {});
       } else {
         // outside screen, hide it
         label.style.display = 'none';

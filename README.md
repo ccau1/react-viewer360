@@ -24,7 +24,6 @@ Display one 360 image
 
 ```bash
 import Viewer360 from "react-viewer360";
-import "react-viewer360/viewer360.css";
 
 export const App = () => {
   return (
@@ -39,7 +38,7 @@ Display one 360 image with markers
 
 ```bash
 import Viewer360 from "react-viewer360";
-import "react-viewer360/viewer360.css";
+import "react-viewer360/dist/viewer360.css";
 
 export const App = () => {
   return (
@@ -65,7 +64,7 @@ Display multiple 360 images with markers
 
 ```bash
 import Viewer360 from "react-viewer360";
-import "react-viewer360/viewer360.css";
+import "react-viewer360/dist/viewer360.css";
 
 export const App = () => {
   return (
@@ -115,10 +114,10 @@ export const App = () => {
 | autoRotate             | boolean             | false   | Flag for whether screen will auto rotate                                             |
 | autoRotateSpeed        | number              | 1       | If autoRotate true, the speed it'll move per frame                                   |
 | initialCameraRotation  | View360Point        |         | The initial camera rotation (using XYZ) on first load                                |
-| pointMarkerSprite      | string              |         |                                                                                      |
-| markerSprite           | string              |         |                                                                                      |
-| pointMarkerSpriteScale | number              | 0.2     |                                                                                      |
-| markerSpriteScale      | number              | 0.15    |                                                                                      |
+| pointMarkerSprite      | string              |         | A marker image to indicate next travel point                                         |
+| markerSprite           | string              |         | A marker image indicating a marker position                                          |
+| pointMarkerSpriteScale | number              | 0.2     | Scale the point marker image                                                         |
+| markerSpriteScale      | number              | 0.15    | Scale the marker image                                                               |
 | styles                 | Viewer360Styles     | {}      | Styles for each part of the dom layer                                                |
 | hideLabels             | boolean             | false   | Hide all labels (both markers and points)                                            |
 

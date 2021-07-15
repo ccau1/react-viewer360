@@ -5,7 +5,7 @@ import eventVars from './eventVars';
 import { Viewer360Props } from './types';
 
 const Viewer360 = ({
-  positions = [],
+  positions,
   img,
   markers,
   dragSpeed = 1,
@@ -14,13 +14,15 @@ const Viewer360 = ({
   initialCameraRotation,
   pointMarkerSprite = 'https://img.icons8.com/plasticine/2x/marker.png',
   markerSprite = 'http://www.telestream.net/wirecast-go/images/icon_512x512-2x.png',
-  pointMarkerSpriteScale = 40,
-  markerSpriteScale = 35,
+  pointMarkerSpriteScale,
+  markerSpriteScale,
   styles,
   hideLabels,
 }: Viewer360Props) => {
   const divRef = useRef<HTMLDivElement>(null);
+  const instantiated = useRef(false);
   const view360ManagerRef = useRef<View360Manager | undefined>();
+  const view360Manager: View360Manager | undefined = view360ManagerRef.current;
 
   useEffect(() => {
     view360ManagerRef.current = new View360Manager();
@@ -28,8 +30,6 @@ const Viewer360 = ({
 
   // @ts-ignore
   const [_lastUpdate, forceUpdate] = useState(new Date());
-  const view360Manager: View360Manager | undefined = view360ManagerRef.current;
-  const instantiated = useRef(false);
 
   // attach renderer to dom and instantiate
   useEffect(() => {
@@ -87,7 +87,7 @@ const Viewer360 = ({
     view360Manager?.setPoints(
       img
         ? [{ point: { x: 0, y: 0, z: 0 }, img, markers: markers || [] }]
-        : positions
+        : positions || []
     );
     forceUpdate(new Date());
   }, [positions, img, markers, view360Manager]);
