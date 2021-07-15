@@ -1,0 +1,15 @@
+{
+  "editor.formatOnSave": true,
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "editor.codeActionsOnSave": {
+    // for vue files
+    "source.fixAll.eslint": true
+  },
+  "editor.tabSize": 2,
+  "editor.rulers": [80],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "files.eol": "\n",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

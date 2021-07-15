@@ -1,0 +1,19 @@
+.viewer_360_marker_label .viewer_360_marker_label_content {
+  transition: all 300ms;
+  transform: scale(0.5);
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+  color: white;
+}
+
+.viewer_360_marker_label .viewer_360_marker_label_content a {
+  color: white;
+  text-decoration: underline;
+}
+
+.viewer_360_marker_label:hover .viewer_360_marker_label_content {
+  opacity: 1;
+  transform: scale(1);
+  height: auto;
+}
