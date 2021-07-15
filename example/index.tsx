@@ -2,9 +2,10 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Viewer360, { Viewer360Position } from '../src/Viewer360';
+import Viewer360 from '../src/Viewer360';
 import { useState } from 'react';
 import '../src/viewer360.css';
+import { Viewer360Position } from '../src/types';
 
 const Viewer360Page = () => {
   const [positions, setPositions] = useState<Viewer360Position[]>([
@@ -98,7 +99,7 @@ const Viewer360Page = () => {
   // }, [positions]);
   return (
     <Viewer360
-      autoRotate={false}
+      autoRotate={true}
       positions={positions}
       dragSpeed={0.5}
       autoRotateSpeed={1}

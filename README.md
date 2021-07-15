@@ -1,5 +1,9 @@
 # React-Viewer360
 
+<p align="center" width="100%">
+  <img width="75%" src="https://github.com/ccau1/react-viewer360/blob/master/example/sample1.gif">
+</p>
+
 This is a 360 viewer library inspired by google map's navigation. Using points for each 360 image, the 360 images are placed in a 3D world using XYZ coordinates and the POV travels to each position in transition.
 
 ## Why
