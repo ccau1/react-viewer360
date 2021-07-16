@@ -1,8 +1,8 @@
-# React-Viewer360
-
 <p align="center" width="100%">
   <img width="75%" src="https://github.com/ccau1/react-viewer360/blob/master/example/sample1.gif">
 </p>
+
+# React-Viewer360
 
 This is a 360 viewer library inspired by google map's navigation. Using points for each 360 image, the 360 images are placed in a 3D world using XYZ coordinates and the POV travels to each position in transition.
 
@@ -171,10 +171,10 @@ markerLabelContent?: React.CSSProperties;
 Classes to override
 | ClassName | Position |
 | --------- | -------- |
-| .viewer_360_marker_label | Marker's label |
+| .viewer_360_marker_label | Marker's label container|
 | .viewer_360_marker_label_content | Marker's label content |
-| .360_marker_label_hover | Marker's label hover area |
-| .viewer_360_point_marker_label | Position's label |
+| .viewer_360_marker_label_hover | Marker's label hover area |
+| .viewer_360_point_marker_label | Position's label container |
 | .viewer_360_point_marker_label_content | Position's label content |
 | .viewer_360_point_marker_label_hover | Position's label hover area |
 

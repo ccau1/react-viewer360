@@ -500,7 +500,7 @@ export class View360Manager {
             ...this.styles.markerLabelHover,
           },
           key: `360_marker_label_${index}_hover`,
-          className: '360_marker_label_hover',
+          className: 'viewer_360_marker_label_hover',
         }),
         React.createElement('div', {
           className: 'viewer_360_marker_label_content',
