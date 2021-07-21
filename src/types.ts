@@ -42,6 +42,7 @@ export interface Viewer360Props {
   markerSpriteScale?: number;
   styles?: Viewer360Styles;
   hideLabels?: boolean;
+  enableZoom?: boolean;
 }
 
 export interface Viewer360Styles {

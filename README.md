@@ -124,6 +124,7 @@ export const App = () => {
 | markerSpriteScale      | number              | 0.15    | Scale the marker image                                                               |
 | styles                 | Viewer360Styles     | {}      | Styles for each part of the dom layer                                                |
 | hideLabels             | boolean             | false   | Hide all labels (both markers and points)                                            |
+| enableZoom             | boolean             | true    | Enable zoom in/out on scroll                                                         |
 
 ## Structures
 

@@ -18,6 +18,7 @@ const Viewer360 = ({
   markerSpriteScale,
   styles,
   hideLabels,
+  enableZoom = true,
 }: Viewer360Props) => {
   const divRef = useRef<HTMLDivElement>(null);
   const instantiated = useRef(false);
@@ -113,6 +114,7 @@ const Viewer360 = ({
     // Handle mouse movement
     let restartAutoRotateTimeout: NodeJS.Timeout | null = null;
     divRef.current.onwheel = (ev) => {
+      if (!enableZoom) return;
       view360Manager.setFOVDelta(ev.deltaY * 0.05);
     };
 
@@ -140,7 +142,7 @@ const Viewer360 = ({
         }, 1000);
       });
     };
-  }, [divRef.current, view360Manager, autoRotate, dragSpeed]);
+  }, [divRef.current, view360Manager, autoRotate, dragSpeed, enableZoom]);
 
   return (
     <div
