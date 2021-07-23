@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { View360Manager } from './View360Manager';
 import eventVars from './eventVars';
-import { Viewer360Props } from './types';
+import { Position2D, Viewer360Props } from './types';
 
 const Viewer360 = ({
   positions,
@@ -39,6 +39,7 @@ const Viewer360 = ({
     instantiated.current = true;
 
     divRef.current.appendChild(view360Manager.renderer.domElement);
+    view360Manager.renderer.domElement.style.touchAction = 'none';
 
     !view360Manager.isDrawing && view360Manager.startDrawing();
     view360Manager.moveToPointByIndex(view360Manager.activeIndex, 0);
@@ -121,6 +122,30 @@ const Viewer360 = ({
     // divRef.current.ondblclick = () => {
     // };
 
+    let lastPos: Position2D | null = null;
+    divRef.current?.addEventListener('touchstart', (ev: TouchEvent) => {
+      restartAutoRotateTimeout && clearTimeout(restartAutoRotateTimeout);
+      view360Manager.shouldAutoRotate = false;
+    });
+    divRef.current?.addEventListener('touchmove', (ev: TouchEvent) => {
+      if (!lastPos)
+        lastPos = { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
+
+      view360Manager.moveCamera2DDelta({
+        x: -(lastPos.x - ev.touches[0].clientX) * dragSpeed,
+        y: -(lastPos.y - ev.touches[0].clientY) * dragSpeed,
+      });
+      lastPos = { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
+    });
+    divRef.current?.addEventListener('touchend', () => {
+      lastPos = null;
+
+      restartAutoRotateTimeout && clearTimeout(restartAutoRotateTimeout);
+      restartAutoRotateTimeout = setTimeout(() => {
+        view360Manager.shouldAutoRotate = !!autoRotate;
+      }, 1000);
+    });
+
     divRef.current.onmousedown = () => {
       // mouseDownPos
       restartAutoRotateTimeout && clearTimeout(restartAutoRotateTimeout);
@@ -152,6 +177,7 @@ const Viewer360 = ({
         width: '100%',
         height: '100%',
         userSelect: 'none',
+        overflow: 'hidden',
         ...styles?.container,
       }}
     >
