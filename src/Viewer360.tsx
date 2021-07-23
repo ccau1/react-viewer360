@@ -1,25 +1,34 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import { useState } from 'react';
 import { View360Manager } from './View360Manager';
 import eventVars from './eventVars';
 import { Position2D, Viewer360Props } from './types';
 
-const Viewer360 = ({
-  positions,
-  img,
-  markers,
-  dragSpeed = 1,
-  autoRotate,
-  autoRotateSpeed = 1,
-  initialCameraRotation,
-  pointMarkerSprite = 'https://img.icons8.com/plasticine/2x/marker.png',
-  markerSprite = 'http://www.telestream.net/wirecast-go/images/icon_512x512-2x.png',
-  pointMarkerSpriteScale,
-  markerSpriteScale,
-  styles,
-  hideLabels,
-  enableZoom = true,
-}: Viewer360Props) => {
+const Viewer360 = (
+  {
+    positions,
+    img,
+    markers,
+    dragSpeed = 1,
+    autoRotate,
+    autoRotateSpeed = 1,
+    initialCameraRotation,
+    pointMarkerSprite = 'https://img.icons8.com/plasticine/2x/marker.png',
+    markerSprite = 'http://www.telestream.net/wirecast-go/images/icon_512x512-2x.png',
+    pointMarkerSpriteScale,
+    markerSpriteScale,
+    styles,
+    hideLabels,
+    enableZoom = true,
+  }: Viewer360Props,
+  ref: ForwardedRef<any>
+) => {
   const divRef = useRef<HTMLDivElement>(null);
   const instantiated = useRef(false);
   const view360ManagerRef = useRef<View360Manager | undefined>();
@@ -169,6 +178,19 @@ const Viewer360 = ({
     };
   }, [divRef.current, view360Manager, autoRotate, dragSpeed, enableZoom]);
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      zoomDelta: (delta: number) => view360Manager?.setFOVDelta(delta),
+      goToIndex: (positionIndex: number, duration?: number) =>
+        view360Manager?.moveToPointByIndex(positionIndex, duration),
+      startDrawing: view360Manager?.startDrawing,
+      stopDrawing: view360Manager?.stopDrawing,
+      dragDelta: view360Manager?.moveCamera2DDelta,
+    }),
+    [view360Manager]
+  );
+
   return (
     <div
       ref={divRef}
@@ -186,4 +208,4 @@ const Viewer360 = ({
   );
 };
 
-export default Viewer360;
+export default forwardRef<any, Viewer360Props>(Viewer360);

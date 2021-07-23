@@ -126,6 +126,28 @@ export const App = () => {
 | hideLabels             | boolean             | false   | Hide all labels (both markers and points)                                            |
 | enableZoom             | boolean             | true    | Enable zoom in/out on scroll                                                         |
 
+## Ref Functions
+
+`zoomDelta(delta: number)`
+
+change zoom by delta
+
+`goToIndex: (positionIndex: number, duration?: number)`
+
+go to position by index
+
+`startDrawing()`
+
+start drawing loop
+
+`stopDrawing()`
+
+stop drawing loop
+
+`dragDelta(delta: Position2D, speed?: number)`
+
+drag the 3D world through 2D screen
+
 ## Structures
 
 ### Viewer360Position
