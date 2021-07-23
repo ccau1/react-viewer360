@@ -123,7 +123,7 @@ const Viewer360 = ({
     // };
 
     let lastPos: Position2D | null = null;
-    divRef.current?.addEventListener('touchstart', (ev: TouchEvent) => {
+    divRef.current?.addEventListener('touchstart', () => {
       restartAutoRotateTimeout && clearTimeout(restartAutoRotateTimeout);
       view360Manager.shouldAutoRotate = false;
     });
